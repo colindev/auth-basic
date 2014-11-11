@@ -1,0 +1,27 @@
+{
+    "name": "rde/auth-basic",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Colin",
+            "email": "colin1124x@gmail.com"
+        }
+    ],
+    "description": "簡單的 Http Basic 驗證",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rde\\": "src/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

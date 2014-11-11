@@ -1,8 +1,11 @@
-<?php
+<?php namespace Rde\Auth;
 
-class AuthBasic
+use Closure;
+
+class Basic implements AuthInterface
 {
-    private $rule = null;
+    protected $rule = null;
+    protected $realm;
 
     public function __construct($config)
     {
@@ -18,6 +21,11 @@ class AuthBasic
         }
     }
 
+    public function realm($name)
+    {
+        $this->realm = $name;
+    }
+
     public function isAuthorized()
     {
         if ($this->rule instanceof Closure &&
@@ -26,7 +34,7 @@ class AuthBasic
             $authorization = preg_replace('/^Basic\s/', '', $_SERVER['HTTP_AUTHORIZATION']);
             $authorization = base64_decode($authorization);
 
-            if (preg_match('/^(\w*):(\w*)$/', $authorization, $params)) {
+            if (preg_match('/^(\w*):(.*)$/', $authorization, $params)) {
                 return true === call_user_func($this->rule, $params[1], $params[2]);
             }
         }
@@ -36,8 +44,13 @@ class AuthBasic
 
     public function challenge()
     {
-        header('WWW-Authenticate: Basic');
+        header($this->buildAuthentication());
         header('HTTP/1.1 401 Unauthorized');
         exit;
+    }
+
+    public function buildAuthentication()
+    {
+        return sprintf('WWW-Authenticate: Basic realm="%s"', $this->realm ?: 'admin realm');
     }
 }
