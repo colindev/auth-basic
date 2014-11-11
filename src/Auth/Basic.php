@@ -10,7 +10,7 @@ class Basic implements AuthInterface
     public function __construct($config)
     {
         if (is_array($config)) {
-            $this->rule = function($username, $password) use($config) {
+            $this->rule = function($self, $username, $password) use($config) {
 
                 return is_string($username) &&
                 isset($config[$username]) &&
@@ -35,7 +35,7 @@ class Basic implements AuthInterface
             $authorization = base64_decode($authorization);
 
             if (preg_match('/^(\w*):(.*)$/', $authorization, $params)) {
-                return true === call_user_func($this->rule, $params[1], $params[2]);
+                return true === call_user_func($this->rule, $this, $params[1], $params[2]);
             }
         }
 
