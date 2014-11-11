@@ -53,4 +53,10 @@ class Basic implements AuthInterface
     {
         return sprintf('WWW-Authenticate: Basic realm="%s"', $this->realm ?: 'admin realm');
     }
+
+    public function logout()
+    {
+        header('HTTP/1.1 401 Unauthorized');
+        exit;
+    }
 }
