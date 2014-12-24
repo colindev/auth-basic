@@ -2,7 +2,7 @@
 
 use Closure;
 
-class Basic implements AuthInterface
+class Basic
 {
     protected $rule = null;
     protected $realm;
