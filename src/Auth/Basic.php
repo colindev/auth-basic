@@ -28,14 +28,17 @@ class Basic
 
     public function isAuthorized()
     {
-        if ($this->rule instanceof Closure &&
-            isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        if ($this->rule instanceof Closure) {
 
-            $authorization = preg_replace('/^Basic\s/', '', $_SERVER['HTTP_AUTHORIZATION']);
-            $authorization = base64_decode($authorization);
+            if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+                $authorization = preg_replace('/^Basic\s/', '', $_SERVER['HTTP_AUTHORIZATION']);
+                $authorization = base64_decode($authorization);
 
-            if (preg_match('/^(\w*):(.*)$/', $authorization, $params)) {
-                return true === call_user_func($this->rule, $params[1], $params[2]);
+                if (preg_match('/^(\w*):(.*)$/', $authorization, $params)) {
+                    return true === call_user_func($this->rule, $params[1], $params[2]);
+                }
+            } elseif (isset($_SERVER['PHP_AUTH_PW']) && isset($_SERVER['PHP_AUTH_USER'])) {
+                return true === call_user_func($this->rule, $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
             }
         }
 
