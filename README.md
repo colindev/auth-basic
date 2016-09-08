@@ -1,5 +1,5 @@
 # rde/auth-basic
-[![Build Status](https://travis-ci.org/colin1124x/auth-basic.svg?branch=master)](https://travis-ci.org/colin1124x/auth-basic)
+[![Build Status](https://travis-ci.org/colindev/auth-basic.svg?branch=master)](https://travis-ci.org/colindev/auth-basic)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/colin1124x/auth-basic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/colin1124x/auth-basic/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/colin1124x/auth-basic/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/colin1124x/auth-basic/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/rde/auth-basic/v/stable)](https://packagist.org/packages/rde/auth-basic) 
